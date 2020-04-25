@@ -1,0 +1,115 @@
+<% include ../partials/header.ejs %>
+        <div class="main-content">
+            <div class="container cart-block-style">          
+                <div class="breadcrumbs">
+                    <a href="home.html"><i class="fa fa-home"></i></a>
+                    <a href="#">Shopping Cart</a>
+                </div>
+                <div class="contentText">
+                    <h1>Shopping Cart                              
+                    </h1>
+                </div>
+                <form>
+                   
+                    <div class="table-responsive margin-top">
+                            <% if(products[0]){ %>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td class="text-center"></td>
+                                    <td class="text-left">PRODUCT NAME</td>
+                                    
+                                    <td class="text-left">QUANTITY</td>
+                                    <td class="text-right">UNIT PRICE</td>
+                                    <td class="text-right">TOTAL</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <% products.forEach(function(item){ %>
+                                    <tr>
+                                            <td class="text-center">                                   
+                                                <a href="#">
+                                                    <img title="ana"  src="<%= item.image %>" style="width: 100px; height: 80px;">
+                                                </a>
+                                            </td>
+                                            <td class="text-left"><a href="#"><%= item.title %></a>
+                                                <br>
+                    
+                                            </td>
+                                            <td class="text-left"><br><div style="max-width: 200px;" class="input-group btn-block">
+                                                <p><%= item.qty %></p>
+                                            <span class="input-group-btn">
+                                                <a href='add-to-cart/<%= item.id %>' class="btn btn-primary"><i class="fas fa-sort-up"></i></a>
+                                                <a href='reduce/<%= item.id %>' class="btn btn-primary"><i class="fas fa-sort-down"></i></a>
+                                                <a href='remove/<%= item.id %>' class="btn btn-danger"><i class="fa fa-times-circle"></i></a>
+                                            </span></div></td>
+                                                   
+                                            <td class="text-right"><br><%= item.price %></td>
+                                            <td class="text-right"><br><%= item.price %></td>
+                                        </tr>
+                                <% }); %>
+                              
+                            </tbody>
+                        </table>
+                        <% }else{ %>
+                            <h3>No Items Added To Cart</h3>
+                        <% } %>
+                    </div>
+                    
+                </form>
+                <br>
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-8">
+                        <table class="table table-bordered">
+                            <tbody><tr>
+                            <strong style="font-size: 30px;float: right">Pricing Details</strong>
+                            <td class="text-right"><strong>Sub-Total:</strong></td>
+                            <td class="text-right"><% if(products){ %>
+                            <%= totalPrice  %> <% }else{ %>
+                            0 <% } %></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Coupon Code:</td>
+                                <td class="text-right">₹0</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Gift Voucher:</td>
+                                <td class="text-right">₹0</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Tax :</td>
+                                <td class="text-right">₹2.00</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Tax:</td>
+                                <td class="text-right">₹16.00</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Order Total:</strong></td>
+                                <td class="text-right"><% if(products[0]){ %>
+                                    <%= totalPrice+16+2 %><% }else{ %>
+                                    0 <% } %></td>
+                            </tr>
+                            </tbody></table>
+                    </div>
+                </div>
+                <form action="/confirm-order" method="POST" style="border: 2px solid lightgrey; padding: 10px;">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Mobile Number:</label>
+                      <input type="number" class="form-control" id="exampleInputEmail1" name="number" aria-describedby="emailHelp" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Address:</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="address" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirm Order</button>
+                  </form>
+                <br>
+                <div class="buttons">
+                    <div class="pull-left"><a class="btn btn-default" href="/"><i class="fa fa-caret-right"></i>&nbsp;Continue Shopping</a></div>
+                </div>
+            </div>
+        </div>
+
+<% include ../partials/footer.ejs %>

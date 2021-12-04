@@ -9,7 +9,7 @@
   },
   "engines": {
     "node": "14.x"
-  }
+  },
   "author": "yash kerkar",
   "license": "ISC",
   "dependencies": {
